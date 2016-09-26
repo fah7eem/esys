@@ -1,6 +1,6 @@
 <?PHP
 include ('functions.php');
-echo "<h1> Welcome </h1> <br>";
+echo "<h1>Expert System</h1>";
 
 if($_POST['subindex'] === 'OK' and $_FILES['file'])
 {
@@ -8,12 +8,18 @@ if($_POST['subindex'] === 'OK' and $_FILES['file'])
 	foreach ($target as $line)
 		read_line ($line);
 }
-else
-	echo "Add file<br>"
 ?>
 <HTML>
 <HEAD>
 <title> Expert System </title>
+<style> 
+	html 
+	{
+	display: table;
+	margin: auto;
+	background-color: #aa80ff;
+	}
+</style>
 </HEAD>
 <BODY>
 <form name='fileup' action='index.php' method='POST' enctype="multipart/form-data">
