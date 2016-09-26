@@ -1,4 +1,8 @@
 <?PHP
+
+$facts = '';
+$query = '';
+$rules = array();
 function read_line($line)
 {
 	$line = trim($line);
@@ -20,7 +24,11 @@ function read_line($line)
 
 function show($line)
 {
-	if(!ctype_space($line))
-		echo $line."<br>";
+	if($line[0] === '=')
+		$GLOBALS['facts'] = $line;
+	else if($line[0] === '?')
+		$GLOBALS['query'] = $line;
+	else 
+		array_push($GLOBALS['rules'], $line);
 }
 ?>

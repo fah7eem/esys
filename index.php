@@ -7,6 +7,8 @@ if($_POST['subindex'] === 'OK' and $_FILES['file'])
 	$target = file($_FILES['file']['tmp_name']);
 	foreach ($target as $line)
 		read_line ($line);
+	echo $facts."<br>".$query."<br>";
+	print_r ($rules);
 	echo "</div>";
 }
 ?>
@@ -27,7 +29,6 @@ if($_POST['subindex'] === 'OK' and $_FILES['file'])
 	color: white;
 	text-align: center;
 	box-shadow: 10px 10px 5px #888888;
-	padding: 15px;
 	}
 </style>
 </HEAD>
@@ -35,7 +36,6 @@ if($_POST['subindex'] === 'OK' and $_FILES['file'])
 <form name='fileup' action='index.php' method='POST' enctype="multipart/form-data">
 <input for='file' type='file' name='file'/>
 <br><input type='submit' name='subindex' value='OK' />
-<input type='submit' value='Refresh' />
 </form>
 </BODY>
 </HTML>
