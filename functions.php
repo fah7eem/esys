@@ -2,20 +2,25 @@
 function read_line($line)
 {
 	$line = trim($line);
+	if($line[0] != '#')
+	{
 	if(preg_match('/^(.*?)#/',$line, $ret))
 	{
 		$ret = preg_replace("/#/" , "\0" , $ret);
 		$ret[0] = str_replace(' ', '', $ret[0]);
-		echo $ret[0]."<BR>";
+		show($ret[0]);
 	}
 	else
 	{
 		$line = str_replace(' ', '' , $line);
-		echo $line."<BR>";
+		show($line);
+	}
 	}
 }
 
-function operater($line)
+function show($line)
 {
+	if(!ctype_space($line))
+		echo $line."<br>";
 }
 ?>
