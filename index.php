@@ -5,11 +5,11 @@ echo "<h1> Welcome </h1> <br>";
 if($_POST['subindex'] === 'OK' and $_POST['file'])
 {
 	$target = file($_POST['file']);
-	foreach ($target as $line_num => $line)
+	foreach ($target as $line)
 		 read_line ($line);
 }
 else
-	echo "Incompleted form<br>"
+	echo "Add file<br>"
 ?>
 <HTML>
 <HEAD>
@@ -19,6 +19,7 @@ else
 <form name='fileup' action='index.php' method='POST' >
 <input type='file' name='file'/>
 <input type='submit' name='subindex' value='OK' />
+<input type='submit' value='Refresh' />
 </form>
 </BODY>
 </HTML>
