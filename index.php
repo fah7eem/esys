@@ -1,5 +1,5 @@
 <?PHP
-include_once('func.class.php');
+include_once('expert.class.php');
 echo "<h1>Expert System</h1>";
 
 if($_POST['subindex'] === 'OK' and $_FILES['file'])
