@@ -1,14 +1,14 @@
 <?PHP
-include ('functions.php');
+include_once('func.class.php');
 echo "<h1>Expert System</h1>";
 
 if($_POST['subindex'] === 'OK' and $_FILES['file'])
 {	echo "<div id='ans' >";
+	$expert = new expert;
 	$target = file($_FILES['file']['tmp_name']);
 	foreach ($target as $line)
-		read_line ($line);
-	echo $facts."<br>".$query."<br>";
-	print_r ($rules);
+		$expert->read_line($line);
+		$expert->getvars();	
 	echo "</div>";
 }
 ?>
