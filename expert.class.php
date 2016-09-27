@@ -48,7 +48,7 @@ private function show($line)
 		$this->facts = $line;
 	else if($line[0] === '?')
 		$this->query = $line;
-	else 
+	else if (!empty($line)) 
 		array_push($this->rules, $line);
 }
 
