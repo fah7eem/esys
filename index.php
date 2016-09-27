@@ -1,11 +1,11 @@
 <?PHP
-include_once('expert.class.php');
+include_once('run.class.php');
 echo "<h1>Expert System</h1>";
 
 if($_POST['subindex'] === 'OK' and $_FILES['file'])
 {	echo "<div id='ans' >";
 	$target = file($_FILES['file']['tmp_name']);
-	$expert = new expert($target);	
+	$expert = new run($target);	
 	$expert->getvars();	
 	echo "</div>";
 }
