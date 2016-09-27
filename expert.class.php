@@ -9,7 +9,8 @@ public $rules = array();
 public function __construct($file)
 {
 	foreach ($file as $line)
-	$this->read_line($line);
+		$this->read_line($line);
+		$this->change_rules();
 }
 
 public function getvars()
@@ -47,6 +48,17 @@ private function show($line)
 		$this->query = $line;
 	else 
 		array_push($this->rules, $line);
+}
+
+public function change_rules()
+{
+	$i = 0;
+	while ($this->rules[$i])
+	{
+		$this->rules[$i] = preg_replace('/=>/' , '=', $this->rules[$i]);
+		$this->rules[$i] = preg_replace('/<=/' , '_', $this->rules[$i]);
+		$i++;
+	}
 }
 }
 ?>
