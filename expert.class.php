@@ -29,11 +29,13 @@ private function read_line($line)
 	if(preg_match('/^(.*?)#/',$line, $ret))
 	{
 		$ret = preg_replace("/#/" , "\0" , $ret);
+		$ret[0] =  preg_replace('/\s\s+/', '', $ret[0]);
 		$ret[0] = str_replace(' ', '', $ret[0]);
 		$this->show($ret[0]);
 	}
 	else
 	{
+		$line =  preg_replace('/\s\s+/', '', $line);
 		$line = str_replace(' ', '' , $line);
 		$this->show($line);
 	}
