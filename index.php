@@ -4,11 +4,9 @@ echo "<h1>Expert System</h1>";
 
 if($_POST['subindex'] === 'OK' and $_FILES['file'])
 {	echo "<div id='ans' >";
-	$expert = new expert;
 	$target = file($_FILES['file']['tmp_name']);
-	foreach ($target as $line)
-		$expert->read_line($line);
-		$expert->getvars();	
+	$expert = new expert($target);	
+	$expert->getvars();	
 	echo "</div>";
 }
 ?>

@@ -6,6 +6,12 @@ public $facts;
 public $query;
 public $rules = array();
 
+public function __construct($file)
+{
+	foreach ($file as $line)
+	$this->read_line($line);
+}
+
 public function getvars()
 {
 	echo $this->facts."<br>";
@@ -13,7 +19,8 @@ public function getvars()
 	foreach ($this->rules as $i)
 	echo $i."<br>";
 }
-public function read_line($line)
+
+private function read_line($line)
 {
 	$line = trim($line);
 	if($line[0] != '#')
