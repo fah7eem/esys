@@ -6,7 +6,7 @@ if($_POST['subindex'] === 'OK' and $_FILES['file'])
 {	echo "<div id='ans' >";
 	$target = file($_FILES['file']['tmp_name']);
 	$expert = new run($target);	
-	echo $expert->test();	
+	$expert->test();
 	echo "</div>";
 }
 ?>

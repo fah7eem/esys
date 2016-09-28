@@ -1,0 +1,104 @@
+B => A
+D + E => B
+G + H => F
+I + J => G
+G => H
+L +	M => K
+O + P => L + N
+N => M
+
+#=DEIJOP # AFKP is true
+=DEIJP # AFP is true, K is false
+?AFKP
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+
+1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+
+1 1 0 1 1 1 1 1 1 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+
+B + C => A
+D | E => B
+B => C
+
+= # A should be false.
+=D # A should be true.
+=E # A should be true.
+=DE # A should be true.
+
+?A
+
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+
+1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+**********************************************************
+
+B => A
+D + E => B
+G + H => F
+I + J => G
+G => H
+L +	M => K
+O + P => L + N
+N => M
+
+=DEIJP 
+?AFKP
+
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+1 1 0 1 1 1 1 1 1 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+# AFP is true, K is false
+
+***************************************************************
+
+
+
+
+B => A
+D + E => B
+G + H => F
+I + J => G
+G => H
+L + M => K
+O + P => L + N
+N => M
+
+=DEIJP 
+?AFKP
+
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+1 1 0 1 1 1 1 1 1 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+# AFP is true, K is false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
