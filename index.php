@@ -1,5 +1,5 @@
 <?PHP
-include_once('run.class.php');
+include_once('includes/run.class.php');
 echo "<h1>Expert System</h1>";
 
 if($_POST['subindex'] === 'OK' and $_FILES['file'])
@@ -13,22 +13,7 @@ if($_POST['subindex'] === 'OK' and $_FILES['file'])
 <HTML>
 <HEAD>
 <title> Expert System </title>
-<style> 
-	html 
-	{
-	display: table;
-	margin: auto;
-	background-color: #aa80ff;
-	font-size: 150%;
-	}
-	#ans 
-	{
-	background-color: #990099;
-	color: white;
-	text-align: center;
-	box-shadow: 10px 10px 5px #888888;
-	}
-</style>
+    <link rel="stylesheet" type="text/css" href="includes/style.css">
 </HEAD>
 <BODY>
 <form name='fileup' action='index.php' method='POST' enctype="multipart/form-data">

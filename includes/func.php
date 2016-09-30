@@ -1,5 +1,10 @@
 <?PHP
 
+function 	hello()
+{
+	echo "hello world";
+}
+
 function	and_($line)
 {
 	$i = 0;

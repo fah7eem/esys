@@ -1,5 +1,6 @@
 <?PHP
 include_once('expert.class.php');
+include_once('func.php');
 
 class run extends expert
 {
