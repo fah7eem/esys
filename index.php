@@ -14,6 +14,7 @@ if($_POST['subindex'] === 'OK' and $_FILES['file'])
 <HEAD>
 <title> Expert System </title>
     <link rel="stylesheet" type="text/css" href="includes/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </HEAD>
 <BODY>
 <form name='fileup' action='index.php' method='POST' enctype="multipart/form-data">
