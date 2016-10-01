@@ -45,9 +45,10 @@ class run extends expert
 	
 	public function test()
 	{
+		$this->getvars();
+		echo "-------------------------------<br>";
 		$this->recur_();
 		$this->display();
-		print_r ($this->rules);
 	}
 
 	private function recur_()
