@@ -47,6 +47,7 @@ class run extends expert
 	{
 		$this->recur_();
 		$this->display();
+		print_r ($this->rules);
 	}
 
 	private function recur_()
@@ -58,7 +59,7 @@ class run extends expert
 		{
 			$a = $rht;
 			$b = $lft;
-			if($a != $this->alpha[$b])
+			if($a !== $this->alpha[$b])
 			{
 				$this->alpha[$b] = $a;
 				$this->recur_();
@@ -83,7 +84,7 @@ class run extends expert
 			{	
 				while($line[$i])
 				{
-					if($line[$i] === '+' || $line[$i] === '|' || $line === '^')
+					if($line[$i] === '+' || $line[$i] === '|' || $line[$i] === '^')
 					{
 						$a = $this->alpha[$line[$i - 1]];
 						$o = $line[$i];
@@ -107,7 +108,7 @@ class run extends expert
 			$i++;
 		}	
 	}
-
+	
 	protected function switch_($value1, $operator, $value2)
 	{
 		switch ($operator) 
@@ -121,10 +122,7 @@ class run extends expert
 			case '^':
 				return $value1 ^ $value2;
 				break;
-			default:
-				return false;
 		}
-		return false;
 	}
 }
 ?>
