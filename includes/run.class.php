@@ -3,7 +3,7 @@ include_once('expert.class.php');
 
 class run extends expert
 {
-	public $alpha = array('A' => 0 , 'B' => 0 , 'C' => 0 , 'D' => 0 , 'E' => 0 , 'F' => 0,
+	public $alpha = array('0'=> 0, '1' => 1, 'A' => 0 , 'B' => 0 , 'C' => 0 , 'D' => 0 , 'E' => 0 , 'F' => 0,
 			'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
 			'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
 			'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
@@ -67,6 +67,7 @@ class run extends expert
 			}
 		
 		}
+	//	 print_r ($this->left);
 	}
 
 	private function change_()
@@ -90,10 +91,11 @@ class run extends expert
 						$a = $this->alpha[$line[$i - 1]];
 						$o = $line[$i];
 						$b = $this->alpha[$line[$i + 1]];
-					array_push($this->left, $this->switch_($a, $o , $b));
+						$p = $this->switch_($a, $o , $b);
 					}	
 					$i++;
 				}
+				array_push($this->left, $p);
 			}
 		}
 	}
