@@ -117,13 +117,14 @@ class run extends expert
 			{
 				if($line[$i] === $chk)
 				{
-					if($p)
-						$a = $p;
-					else
-						$a = $this->alpha[$line[$i - 1]];
+					$a = $this->alpha[$line[$i - 1]];
 					$o = $line[$i];
 					$b = $this->alpha[$line[$i + 1]];
 					$p = $this->switch_($a, $o , $b);
+					
+					$line[$i - 1] = $p;
+					$line[$i] = '|';
+					$line[$i + 1] = $p;
 				}	
 				$i++;
 			}
