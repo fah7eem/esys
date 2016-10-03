@@ -4,9 +4,9 @@ include_once('expert.class.php');
 class run extends expert
 {
 	public $alpha = array('0'=> 0, '1' => 1, 'A' => 0 , 'B' => 0 , 'C' => 0 , 'D' => 0 , 'E' => 0 , 'F' => 0,
-			'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
-			'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
-			'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
+		'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
+		'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
+		'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
 	public $left = array();
 	public $right = array();
 
@@ -23,7 +23,7 @@ class run extends expert
 			echo $elem.":".$line."<br>";
 		}
 	}
-	
+
 	public function display()
 	{
 		$i = 0;	
@@ -32,21 +32,21 @@ class run extends expert
 			$k = $this->query[$i];
 			if(ctype_alpha($k))
 			{
-			echo $k." is ";
-			if($this->alpha[$k] === 1)
-				echo "True";
-			else
-				echo "False";
-			echo "<BR>";
+				echo $k." is ";
+				if($this->alpha[$k] === 1)
+					echo "True";
+				else
+					echo "False";
+				echo "<BR>";
 			}
-		$i++;
+			$i++;
 		}	
 	} 
-	
+
 	public function test()
 	{
 		$this->getvars();
-	echo "-------------------------------<BR>";
+		echo "-------------------------------<BR>";
 		$this->recur_();
 		$this->display();
 	}
@@ -56,7 +56,7 @@ class run extends expert
 		$this->change_();
 		$chk = array();
 		$chk = array_combine($this->right , $this->left);	
-		 foreach($chk as $lft => $rht)
+		foreach($chk as $lft => $rht)
 		{
 			$a = $rht;
 			$b = $lft;
@@ -65,15 +65,15 @@ class run extends expert
 				$this->alpha[$b] = $a;
 				$this->recur_();
 			}
-		
+
 		}
-	//	 print_r ($this->left);
+		//	 print_r ($this->left);
 	}
 
 	private function change_()
 	{	
-	$this->left = array();
-	$this->right = array();	
+		$this->left = array();
+		$this->right = array();	
 		foreach($this->rules as $rule)
 		{
 			$split = explode("=", $rule);
@@ -83,32 +83,7 @@ class run extends expert
 				array_push($this->left,$this->alpha[$line[0]]);
 			else
 			{
-				$k = 0;
-				while($k < 3)
-				{
-					if($k === 0)
-								$chk = '+';
-						else if ($k === 1)
-									$chk = '|';
-						else if ($k === 2)
-							$chk = '^';
-				$i = 0;	
-				while($line[$i])
-				{
-					if($line[$i] === $chk)
-					{
-						if($p)
-							$a = $p;
-						else
-							$a = $this->alpha[$line[$i - 1]];
-						$o = $line[$i];
-						$b = $this->alpha[$line[$i + 1]];
-						$p = $this->switch_($a, $o , $b);
-					}	
-					$i++;
-				}
-				$k++;
-				}
+				$p = $this->solver_($line);
 				array_push($this->left, $p);
 			}
 		}
@@ -125,25 +100,51 @@ class run extends expert
 			$i++;
 		}	
 	}
-	
-	function operater($chk, $line)
+
+	function solver_($line)
 	{
-		
+		$k = 0;
+		while($k < 3)
+		{
+			if($k === 0)
+				$chk = '+';
+			else if ($k === 1)
+				$chk = '|';
+			else if ($k === 2)
+				$chk = '^';
+			$i = 0;	
+			while($line[$i])
+			{
+				if($line[$i] === $chk)
+				{
+					if($p)
+						$a = $p;
+					else
+						$a = $this->alpha[$line[$i - 1]];
+					$o = $line[$i];
+					$b = $this->alpha[$line[$i + 1]];
+					$p = $this->switch_($a, $o , $b);
+				}	
+				$i++;
+			}
+			$k++;
+		}
+		return ($p);	
 	}
 
 	protected function switch_($value1, $operator, $value2)
 	{
 		switch ($operator) 
 		{
-			case '+':
-				return $value1 & $value2;
-				break;
-			case '|':
-				return $value1 | $value2;
-				break;
-			case '^':
-				return $value1 ^ $value2;
-				break;
+		case '+':
+			return $value1 & $value2;
+			break;
+		case '|':
+			return $value1 | $value2;
+			break;
+		case '^':
+			return $value1 ^ $value2;
+			break;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-Z | A + B = D
+Z ^ R| A + B = D
 
 =AB
 ?D
