@@ -1,4 +1,4 @@
-Z ^ R| A + P = D
-
+Z ^ R | A + P = D
+Z ^ A + B | R = E
 =AB
-?D
+?DE
