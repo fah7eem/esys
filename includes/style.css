@@ -2,13 +2,13 @@ html
 {                                                                                                                             
 display: table;                                                                                                               
 margin: auto;                                                                                                                 
-	background-color: #aa80ff;                                                                                                    
+	background-color: #80dbff;                                                                                                    
 	font-size: 150%;
 }
 
 #ans 
 {
-	background-color: #990099;
+	background-color: #002099;
 color: white;
        text-align: center;
        box-shadow: 10px 10px 5px #888888;
