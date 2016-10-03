@@ -88,7 +88,10 @@ class run extends expert
 				{
 					if($line[$i] === '+' || $line[$i] === '|' || $line[$i] === '^')
 					{
-						$a = $this->alpha[$line[$i - 1]];
+						if($p)
+							$a = $p;
+						else
+							$a = $this->alpha[$line[$i - 1]];
 						$o = $line[$i];
 						$b = $this->alpha[$line[$i + 1]];
 						$p = $this->switch_($a, $o , $b);
@@ -112,6 +115,12 @@ class run extends expert
 		}	
 	}
 	
+	function operater($chk, $line)
+	{
+		$i = 0;
+
+	}
+
 	protected function switch_($value1, $operator, $value2)
 	{
 		switch ($operator) 
