@@ -76,17 +76,26 @@ class run extends expert
 	$this->right = array();	
 		foreach($this->rules as $rule)
 		{
-			$i = 0;
 			$split = explode("=", $rule);
 			$line = $split[0];
 			array_push($this->right, $split[1]);
 			if(!$line[1])
 				array_push($this->left,$this->alpha[$line[0]]);
 			else
-			{	
+			{
+				$k = 0;
+				while($k < 3)
+				{
+					if($k === 0)
+								$chk = '+';
+						else if ($k === 1)
+									$chk = '|';
+						else if ($k === 2)
+							$chk = '^';
+				$i = 0;	
 				while($line[$i])
 				{
-					if($line[$i] === '+' || $line[$i] === '|' || $line[$i] === '^')
+					if($line[$i] === $chk)
 					{
 						if($p)
 							$a = $p;
@@ -97,6 +106,8 @@ class run extends expert
 						$p = $this->switch_($a, $o , $b);
 					}	
 					$i++;
+				}
+				$k++;
 				}
 				array_push($this->left, $p);
 			}
@@ -117,8 +128,7 @@ class run extends expert
 	
 	function operater($chk, $line)
 	{
-		$i = 0;
-
+		
 	}
 
 	protected function switch_($value1, $operator, $value2)
