@@ -123,7 +123,7 @@ class run extends expert
 					$p = $this->switch_($a, $o , $b);
 					
 					$line[$i - 1] = $p;
-					$line[$i] = '|';
+					$line[$i] = ' ';
 					$line[$i + 1] = $p;
 				}	
 				$i++;
