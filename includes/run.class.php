@@ -67,7 +67,6 @@ class run extends expert
 			}
 
 		}
-		//	 print_r ($this->left);
 	}
 
 	private function change_()
@@ -79,6 +78,12 @@ class run extends expert
 			$split = explode("=", $rule);
 			$line = $split[0];
 			array_push($this->right, $split[1]);
+			
+			if(preg_match_all('/\((.*?)\)/', $line, $match))
+			{
+				foreach ($match[0] as $i)
+				$line = str_replace($i,$this->solver_($i),$line);
+			}	
 			if(!$line[1])
 				array_push($this->left,$this->alpha[$line[0]]);
 			else
@@ -101,7 +106,7 @@ class run extends expert
 		}	
 	}
 
-	function solver_($line)
+	private function solver_($line)
 	{
 		$k = 0;
 		while($k < 3)
