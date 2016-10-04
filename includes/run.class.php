@@ -109,13 +109,15 @@ class run extends expert
 	private function solver_($line)
 	{
 		$k = 0;
-		while($k < 3)
+		while($k < 4)
 		{
 			if($k === 0)
+				$chk = '!';
+			else if($k === 1)
 				$chk = '+';
-			else if ($k === 1)
-				$chk = '|';
 			else if ($k === 2)
+				$chk = '|';
+			else if ($k === 3)
 				$chk = '^';
 			$i = 0;	
 			while($line[$i])
@@ -127,7 +129,8 @@ class run extends expert
 					$b = $this->alpha[$line[$i + 1]];
 					$p = $this->switch_($a, $o , $b);
 					
-					$line[$i - 1] = $p;
+					if($chk !== '!')	
+						$line[$i - 1] = $p;
 					$line[$i] = ' ';
 					$line[$i + 1] = $p;
 				}	
@@ -142,6 +145,8 @@ class run extends expert
 	{
 		switch ($operator) 
 		{
+		case '!':
+			return !$value2;
 		case '+':
 			return $value1 & $value2;
 			break;
