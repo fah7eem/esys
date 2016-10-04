@@ -16,7 +16,7 @@ class expert
 	public function getvars()
 	{
 		foreach ($this->rules as $i)
-			echo $i."<br>";
+			echo str_replace("=","=>",$i)."<br>";
 		echo "<br>".$this->facts."<br>";
 		echo $this->query."<br>";
 	}
