@@ -4,9 +4,9 @@ include_once('expert.class.php');
 class run extends expert
 {
 	public $alpha = array('0'=> 0, '1' => 1, 'A' => 0 , 'B' => 0 , 'C' => 0 , 'D' => 0 , 'E' => 0 , 'F' => 0,
-		'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
-		'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
-		'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
+			'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
+			'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
+			'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
 	public $left = array();
 	public $right = array();
 
@@ -78,11 +78,11 @@ class run extends expert
 			$split = explode("=", $rule);
 			$line = $split[0];
 			array_push($this->right, $split[1]);
-			
+
 			if(preg_match_all('/\((.*?)\)/', $line, $match))
 			{
 				foreach ($match[0] as $i)
-				$line = str_replace($i,$this->solver_($i),$line);
+					$line = str_replace($i,$this->solver_($i),$line);
 			}	
 			if(!$line[1])
 				array_push($this->left,$this->alpha[$line[0]]);
@@ -128,7 +128,7 @@ class run extends expert
 					$o = $line[$i];
 					$b = $this->alpha[$line[$i + 1]];
 					$p = $this->switch_($a, $o , $b);
-					
+
 					if($chk !== '!')	
 						$line[$i - 1] = $p;
 					$line[$i] = ' ';
@@ -145,17 +145,17 @@ class run extends expert
 	{
 		switch ($operator) 
 		{
-		case '!':
-			return !$value2;
-		case '+':
-			return $value1 & $value2;
-			break;
-		case '|':
-			return $value1 | $value2;
-			break;
-		case '^':
-			return $value1 ^ $value2;
-			break;
+			case '!':
+				return !$value2;
+			case '+':
+				return $value1 & $value2;
+				break;
+			case '|':
+				return $value1 | $value2;
+				break;
+			case '^':
+				return $value1 ^ $value2;
+				break;
 		}
 	}
 }
