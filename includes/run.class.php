@@ -53,6 +53,8 @@ class run extends expert
 		print_r ($this->left);
 		echo "<BR>";
 		print_r ($this->imp);
+		echo "<br>";
+		print_r($this->right);
 	}
 
 	private function recur_()
