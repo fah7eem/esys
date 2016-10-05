@@ -4,11 +4,12 @@ include_once('expert.class.php');
 class run extends expert
 {
 	public $alpha = array('0'=> 0, '1' => 1, 'A' => 0 , 'B' => 0 , 'C' => 0 , 'D' => 0 , 'E' => 0 , 'F' => 0,
-			'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
-			'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
-			'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
+		'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
+		'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
+		'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
 	public $left = array();
 	public $right = array();
+	public $imp = array();
 
 	public function __construct($file)
 	{
@@ -49,6 +50,9 @@ class run extends expert
 		echo "-------------------------------<BR>";
 		$this->recur_();
 		$this->display();
+		print_r ($this->left);
+		echo "<BR>";
+		print_r ($this->imp);
 	}
 
 	private function recur_()
@@ -73,8 +77,15 @@ class run extends expert
 	{	
 		$this->left = array();
 		$this->right = array();	
+		$this->imp = array();
 		foreach($this->rules as $rule)
 		{
+
+			if(strpos($rule, '=') !== false)
+				array_push($this->imp, '=');				
+			else if (strpos($rule, '_') !== false)
+				array_push($this->imp, '_');
+
 			$split = explode("=", $rule);
 			$line = $split[0];
 			array_push($this->right, $split[1]);
@@ -145,17 +156,17 @@ class run extends expert
 	{
 		switch ($operator) 
 		{
-			case '!':
-				return !$value2;
-			case '+':
-				return $value1 & $value2;
-				break;
-			case '|':
-				return $value1 | $value2;
-				break;
-			case '^':
-				return $value1 ^ $value2;
-				break;
+		case '!':
+			return !$value2;
+		case '+':
+			return $value1 & $value2;
+			break;
+		case '|':
+			return $value1 | $value2;
+			break;
+		case '^':
+			return $value1 ^ $value2;
+			break;
 		}
 	}
 }
