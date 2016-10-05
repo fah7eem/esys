@@ -10,6 +10,7 @@ class run extends expert
 	public $left = array();
 	public $right = array();
 	public $imp = array();
+	public	$chk = array();
 
 	public function __construct($file)
 	{
@@ -55,14 +56,16 @@ class run extends expert
 		print_r ($this->imp);
 		echo "<br>";
 		print_r($this->right);
+		echo "<br>";
+		print_r($this->chk);
 	}
 
 	private function recur_()
 	{
 		$this->change_();
-		$chk = array();
-		$chk = array_combine($this->right , $this->left);	
-		foreach($chk as $lft => $rht)
+		$this->chk = array();
+		$this->chk = array_combine($this->right , $this->left);	
+		foreach($this->chk as $lft => $rht)
 		{
 			$a = $rht;
 			$b = $lft;
