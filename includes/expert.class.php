@@ -16,8 +16,8 @@ class expert
 	public function getvars()
 	{
 		foreach ($this->rules as $i)
-			echo str_replace("=","=>",$i)."<br>";
-		echo "<br>".$this->facts."<br>";
+			$this->print_i($i);
+			echo "<br>".$this->facts."<br>";
 		echo $this->query."<br>";
 	}
 
@@ -40,6 +40,22 @@ class expert
 				$this->show($line);
 			}
 		}
+	}
+	
+	public function print_i($str)
+	{	
+		$i = 0;
+		while($str[$i])
+		{
+			if($str[$i] === '=' )
+				echo '=>';
+			else if ($str[$i] === '_')
+				echo '<=>';
+			else 
+				echo $str[$i];
+			$i++;
+		}
+		echo "<br>";	
 	}
 
 	private function show($line)
