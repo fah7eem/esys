@@ -4,9 +4,9 @@ include_once('expert.class.php');
 class run extends expert
 {
 	public $alpha = array('0'=> 0, '1' => 1, 'A' => 0 , 'B' => 0 , 'C' => 0 , 'D' => 0 , 'E' => 0 , 'F' => 0,
-		'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
-		'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
-		'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
+			'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
+			'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
+			'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
 	public $left = array();
 	public $right = array();
 	public $imp = array();
@@ -51,13 +51,6 @@ class run extends expert
 		echo "-------------------------------<BR>";
 		$this->recur_();
 		$this->display();
-		print_r ($this->left);
-		echo "<BR>";
-		print_r ($this->imp);
-		echo "<br>";
-		print_r($this->right);
-		echo "<br>";
-		print_r($this->chk);
 	}
 
 	private function recur_()
@@ -73,6 +66,10 @@ class run extends expert
 			{
 				$this->alpha[$b] = $a;
 				$this->recur_();
+			}
+			else if(strlen($b) > 1)
+			{
+				$this->solver_r($b);
 			}
 
 		}
@@ -157,21 +154,51 @@ class run extends expert
 		return ($p);	
 	}
 
+	private function solver_r($b)
+	{
+		$i = 0;
+		$temp = $b;
+		while($temp[$i])
+		{
+			if($this->solver_($temp) !== $a)
+				$temp = $b;
+			if ( $this->alpha[$temp[$i]] === 1)
+				$temp[$i] = 0;
+			else if ($this->alpha[$temp[$i]] === 0)
+				$temp[$i] = 1;
+			$i++;
+		}
+		$i = 0;
+		while($b[$i])
+		{
+			if($this->alpha[$b[$i]] !== $temp[$i] 
+					&& is_numeric($temp[$i]))
+			{
+				if ($temp[$i] === '1')
+					$this->alpha[$b[$i]] = 1;
+				else
+					$this->alpha[$b[$i]] = 0;
+			}
+			$i++;
+		}
+
+	}
+
 	protected function switch_($value1, $operator, $value2)
 	{
 		switch ($operator) 
 		{
-		case '!':
-			return !$value2;
-		case '+':
-			return $value1 & $value2;
-			break;
-		case '|':
-			return $value1 | $value2;
-			break;
-		case '^':
-			return $value1 ^ $value2;
-			break;
+			case '!':
+				return !$value2;
+			case '+':
+				return $value1 & $value2;
+				break;
+			case '|':
+				return $value1 | $value2;
+				break;
+			case '^':
+				return $value1 ^ $value2;
+				break;
 		}
 	}
 }
