@@ -67,9 +67,10 @@ class run extends expert
 				$this->alpha[$b] = $a;
 				$this->recur_();
 			}
-			else if(strlen($b) > 1)
+			else if(strlen($b) > 2)
 			{
-				$this->solver_r($b);
+				if($this->solver_r($b, $a) > 0)
+					$this->recur_();
 			}
 		}	
 	}
@@ -153,7 +154,7 @@ class run extends expert
 		return ($p);	
 	}
 
-	private function solver_r($b)
+	private function solver_r($b , $a)
 	{
 		$i = 0;
 		$temp = $b;
@@ -161,26 +162,30 @@ class run extends expert
 		{
 			if($this->solver_($temp) !== $a)
 				$temp = $b;
+			else
+				return 0;
 			if ( $this->alpha[$temp[$i]] === 1)
-				$temp[$i] = 0;
+				$temp[$i] = '0';
 			else if ($this->alpha[$temp[$i]] === 0)
-				$temp[$i] = 1;
+				$temp[$i] = '1';
 			$i++;
 		}
 		$i = 0;
+		$k = 0;
 		while($b[$i])
 		{
 			if($this->alpha[$b[$i]] !== $temp[$i] 
-					&& is_numeric($temp[$i]))
+					&& ($temp[$i] === '1' or $temp[$i] === '0'))
 			{
 				if ($temp[$i] === '1')
 					$this->alpha[$b[$i]] = 1;
 				else
 					$this->alpha[$b[$i]] = 0;
+				$k++;
 			}
 			$i++;
 		}
-
+		return ($k);
 	}
 
 	protected function switch_($value1, $operator, $value2)
