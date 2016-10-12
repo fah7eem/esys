@@ -64,7 +64,7 @@ class expert
 			$this->facts = $line;
 		else if($line[0] === '?')
 			$this->query = $line;
-		else if (!empty($line)) 
+		else if (preg_match('/=>/', $line)) 
 			array_push($this->rules, $line);
 	}
 

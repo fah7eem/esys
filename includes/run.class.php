@@ -58,10 +58,10 @@ class run extends expert
 		$this->change_();
 		$this->chk = array();
 		$this->chk = array_combine($this->right , $this->left);	
-		foreach($this->chk as $lft => $rht)
+		foreach($this->chk as $rht => $lft)
 		{
-			$a = $rht;
-			$b = $lft;
+			$a = $lft;
+			$b = $rht;
 			if($a !== $this->alpha[$b])
 			{
 				$this->alpha[$b] = $a;
@@ -71,8 +71,7 @@ class run extends expert
 			{
 				$this->solver_r($b);
 			}
-
-		}
+		}	
 	}
 
 	private function change_()
