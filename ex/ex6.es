@@ -4,6 +4,6 @@ B => C
 
 #= # A should be false.
 #=D # A should be true.
-#=E # A should be true.
-=DE # A should be false.
+=E # A should be true.
+#=DE # A should be false.
 ?A
