@@ -5,7 +5,7 @@ echo "<h1>Expert System</h1>";
 if($_POST['subindex'] === 'OK' and $_FILES['file'])
 {	echo "<div id='ans' >";
 	$target = file($_FILES['file']['tmp_name']);
-	$expert = new run($target);	
+	$expert = new run($target, "<BR>");	
 	$expert->test();
 	echo "</div>";
 }

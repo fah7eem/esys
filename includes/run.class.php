@@ -12,9 +12,9 @@ class run extends expert
 	public $imp = array();
 	public	$chk = array();
 
-	public function __construct($file)
+	public function __construct($file , $argnl)
 	{
-		parent::__construct($file);
+		parent::__construct($file, $argnl);
 		$this->assign();
 	}
 
@@ -22,7 +22,7 @@ class run extends expert
 	{
 		foreach ($this->alpha as $elem => $line)
 		{
-			echo $elem.":".$line."<br>";
+			echo $elem.":".$line.$this->nl;
 		}
 	}
 
@@ -39,7 +39,7 @@ class run extends expert
 					echo "True";
 				else
 					echo "False";
-				echo "<BR>";
+				echo $this->nl;
 			}
 			$i++;
 		}	
@@ -48,7 +48,7 @@ class run extends expert
 	public function test()
 	{
 		$this->getvars();
-		echo "-------------------------------<BR>";
+		echo "-------------------------------".$this->nl;
 		$this->recur_();
 		$this->display();
 	}

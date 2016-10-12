@@ -5,20 +5,21 @@ class expert
 	public $facts;
 	public $query;
 	public $rules = array();
-
-	public function __construct($file)
+	public $nl;
+	public function __construct($file, $argnl)
 	{
 		foreach ($file as $line)
 			$this->read_line($line);
 		$this->change_rules();
+		$this->nl = $argnl;
 	}
 
 	public function getvars()
 	{
 		foreach ($this->rules as $i)
 			$this->print_i($i);
-			echo "<br>".$this->facts."<br>";
-		echo $this->query."<br>";
+			echo $this->nl.$this->facts.$this->nl;
+		echo $this->query.$this->nl;
 	}
 
 	private function read_line($line)
@@ -55,7 +56,7 @@ class expert
 				echo $str[$i];
 			$i++;
 		}
-		echo "<br>";	
+		echo $this->nl;	
 	}
 
 	private function show($line)
