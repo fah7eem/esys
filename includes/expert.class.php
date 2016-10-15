@@ -17,9 +17,64 @@ class expert
 	public function getvars()
 	{
 		foreach ($this->rules as $i)
+		{
+			if((strchr($i, '=') or strchr($i, '_')) && (ctype_alpha($i[0])
+			or $i[0] === '(' or $i[0] === '!' ) && $this->check_syntax($i) === 0)
 			$this->print_i($i);
+			else
+				echo "Syntax Error".$this->nl;
+		}
 			echo $this->nl.$this->facts.$this->nl;
 		echo $this->query.$this->nl;
+	}
+	
+	private function check_syntax($line)
+	{
+		$i = 1;
+		while($line[$i])
+		{
+			$c = $line[$i];
+			if($c === '=' or $c ==='_' or $c === '+' or 
+			$c === '|' or $c === '^')
+			{
+				if(!ctype_alpha($line[$i + 1]))
+				{
+					if($line[$i + 1] !== '!' && $line[$i + 1] !== '(')
+					return 1;
+				}
+				if(!ctype_alpha($line[$i - 1]))
+				{
+					if($line[$i - 1] !== ')')
+					return 1;
+				}
+			}
+			else if($c === '(')
+			{
+				if(ctype_alpha($line[$i - 1]))
+					return 1; 
+			}
+			else if($c === ')')
+			{
+				if(ctype_alpha($line[$i + 1]) or $line[$i + 1] === '!')
+					return 1;
+			}
+			else if(ctype_alpha($c))
+			{
+				if(ctype_alpha($line[$i + 1]) or ctype_alpha($line[$i - 1])) 
+					return 1;
+			}
+			else if ($c === '!')
+			{
+				if($line[$i - 1] === '!')
+					return 1;
+				if(!ctype_alpha($line[$i + 1]))
+					return 1;
+			} 
+			else
+				return 1;
+			$i++;
+		}
+		return 0;
 	}
 
 	private function read_line($line)
