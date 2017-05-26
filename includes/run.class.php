@@ -11,7 +11,7 @@ class run extends expert
 	public $right = array();
 	public $imp = array();
 	public	$chk = array();
-
+	public	$log;
 	public function __construct($file , $argnl)
 	{
 		parent::__construct($file, $argnl);
@@ -70,8 +70,7 @@ class run extends expert
 			}
 			else if(strlen($b) > 2)
 			{
-				if($this->solver_r($b, $a) > 0)
-					$this->recur_();
+				$this->solver_r($b, $a);
 			}
 		}	
 	}
@@ -160,38 +159,63 @@ class run extends expert
 		return ($p);	
 	}
 
-	private function solver_r($b , $a)
+	private function solver_r($r , $l)
 	{
-		$i = 0;
-		$temp = $b;
-		while($temp[$i])
-		{
-			if($this->solver_($temp) !== $a)
-				$temp = $b;
-			else
-				return 0;
-			if ( $this->alpha[$temp[$i]] === 1)
-				$temp[$i] = '0';
-			else if ($this->alpha[$temp[$i]] === 0)
-				$temp[$i] = '1';
-			$i++;
-		}
-		$i = 0;
-		$k = 0;
-		while($b[$i])
-		{
-			if($this->alpha[$b[$i]] !== $temp[$i] 
-					&& ($temp[$i] === '1' or $temp[$i] === '0'))
-			{
-				if ($temp[$i] === '1')
-					$this->alpha[$b[$i]] = 1;
-				else
-					$this->alpha[$b[$i]] = 0;
-				$k++;
+		echo $l . " " . $r . " " . "<br>";
+		 $k = 0;
+                while($k < 4)
+                {
+                        if($k === 0) 
+                                $chk = '!';
+                        else if($k === 1)
+                                $chk = '+';
+                        else if ($k === 2)
+                                $chk = '|';
+                        else if ($k === 3)
+                                $chk = '^';
+                        $i = 0; 
+                        while($r[$i])
+                        {
+				if($r[$i] === $chk)
+				{
+					 $a = $this->alpha[$r[$i - 1]];
+                                         $o = $r[$i];
+                                         
+					if($r[$i + 1] !== ' ')
+                                                 $b = $this->alpha[$r[$i + 1]];
+                                         else
+                                                $b = $this->alpha[$r[$i + 2]];
+
+		
+					if($this->switch_($a, $o, $b) !== $l)
+					{
+						if($this->switch_(($a == 1 ? 0 : 1), $o, ($b == 1 ? 0 : 1)) === $l)
+						{
+							$this->alpha[$r[$i - 1]] = ($a == 1 ? 0 : 1);
+					
+						if($r[$i + 1] !== ' ')
+                                                 $this->alpha[$r[$i + 1]] = ($b == 1 ? 0 : 1);
+                                         	else
+                                                 $this->alpha[$r[$i + 2]] = ($b == 1 ? 0 : 1);
+
+						}
+						else if($this->switch_($a, $o, ($b == 1 ? 0 : 1)) === $l)
+						{
+						if($r[$i + 1] !== ' ')
+                                                  $this->alpha[$r[$i + 1]] = ($b == 1 ? 0 : 1);
+                                                 else
+                                                  $this->alpha[$r[$i + 2]] = ($b == 1 ? 0 : 1);
+
+						}
+						else if($this->switch_(($a == 1 ? 0 : 1), $o, $b) === $l)
+							 $this->alpha[$r[$i - 1]] = ($a == 1 ? 0 : 1);
+					}
+						
+				}
+				$i++;
 			}
-			$i++;
+			$k++;
 		}
-		return ($k);
 	}
 
 	protected function switch_($value1, $operator, $value2)
