@@ -62,6 +62,7 @@ class run extends expert
 		{
 			$a = $lft;
 			$b = $rht;
+			
 			if($a !== $this->alpha[$b])
 			{
 				$this->alpha[$b] = $a;
@@ -80,6 +81,7 @@ class run extends expert
 		$this->left = array();
 		$this->right = array();	
 		$this->imp = array();
+	
 		foreach($this->rules as $rule)
 		{
 
@@ -137,11 +139,15 @@ class run extends expert
 			{
 				if($line[$i] === $chk)
 				{
+					$line = trim($line);
 					$a = $this->alpha[$line[$i - 1]];
 					$o = $line[$i];
-					$b = $this->alpha[$line[$i + 1]];
+					if($line[$i + 1] !== ' ')
+						$b = $this->alpha[$line[$i + 1]];
+					else
+						$b = $this->alpha[$line[$i + 2]];
 					$p = $this->switch_($a, $o , $b);
-
+					
 					if($chk !== '!')	
 						$line[$i - 1] = $p;
 					$line[$i] = ' ';
@@ -193,7 +199,7 @@ class run extends expert
 		switch ($operator) 
 		{
 			case '!':
-				return !$value2;
+				return ($value2 == 1 ? 0 : 1);
 			case '+':
 				return $value1 & $value2;
 				break;
