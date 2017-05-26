@@ -161,7 +161,6 @@ class run extends expert
 
 	private function solver_r($r , $l)
 	{
-		echo $l . " " . $r . " " . "<br>";
 		 $k = 0;
                 while($k < 4)
                 {
