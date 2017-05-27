@@ -7,6 +7,8 @@ class run extends expert
 			'G' => 0 , 'H' => 0 , 'I' => 0 , 'J' => 0 , 'K' => 0 , 'L' => 0 , 'M' => 0 , 
 			'N' => 0 , 'O' => 0,'P' => 0 , 'Q' => 0 , 'R' => 0 , 'S' => 0 , 'T' => 0 , 
 			'U' => 0 , 'V' => 0 , 'W' => 0 , 'X' => 0, 'Y' => 0 , 'Z' => 0);
+
+	public $cn = 0;
 	public $left = array();
 	public $right = array();
 	public $imp = array();
@@ -50,19 +52,21 @@ class run extends expert
 		$this->getvars();
 		echo "-------------------------------".$this->nl;
 		$this->recur_();
+		$this->complete();
 		$this->display();
+		
 	}
 
 	private function recur_()
 	{
 		$this->change_();
 		$this->chk = array();
-		$this->chk = array_combine($this->right , $this->left);	
+		
+		$this->chk = array_combine($this->right , $this->left);
 		foreach($this->chk as $rht => $lft)
 		{
 			$a = $lft;
 			$b = $rht;
-			
 			if($a !== $this->alpha[$b])
 			{
 				$this->alpha[$b] = $a;
@@ -72,7 +76,7 @@ class run extends expert
 			{
 				$this->solver_r($b, $a);
 			}
-		}	
+		}
 	}
 
 	private function change_()
@@ -83,7 +87,6 @@ class run extends expert
 	
 		foreach($this->rules as $rule)
 		{
-
 			if(strpos($rule, '=') !== false)
 				array_push($this->imp, '=');				
 			else if (strpos($rule, '_') !== false)
@@ -96,16 +99,28 @@ class run extends expert
 			if(preg_match_all('/\((.*?)\)/', $line, $match))
 			{
 				foreach ($match[0] as $i)
+				{
+					echo $i;
 					$line = str_replace($i,$this->solver_($i),$line);
+				}
 			}	
 			if(!$line[1])
+			{
 				array_push($this->left,$this->alpha[$line[0]]);
+			}
 			else
 			{
 				$p = $this->solver_($line);
 				array_push($this->left, $p);
 			}
 		}
+		$this->cn++;
+	}
+
+	private function complete()
+	{
+		  if($this->cn == 1 and $this->facts[1] and count($this->right) === 2)
+                        $this->alpha[$this->right[0]] = 1;
 	}
 
 	private function assign()
@@ -173,7 +188,7 @@ class run extends expert
                         else if ($k === 3)
                                 $chk = '^';
                         $i = 0; 
-                        while($r[$i])
+                        while($r[$i] and strlen($r) > 1)
                         {
 				if($r[$i] === $chk)
 				{
